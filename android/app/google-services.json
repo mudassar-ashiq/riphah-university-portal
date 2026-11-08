@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1039761447730",
+    "project_id": "myproject-30b71",
+    "storage_bucket": "myproject-30b71.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039761447730:android:f3d0135dbab93510dd552b",
+        "android_client_info": {
+          "package_name": "com.mudassar.university_portal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlTV_-3_qy5XOnHB04ypzJp8wH2X_8hmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

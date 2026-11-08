@@ -1,0 +1,160 @@
+import 'package:flutter/material.dart';
+
+import '../services/auth_service.dart';
+import '../services/portal_repository.dart';
+import '../widgets/glass_card.dart';
+import '../widgets/section_widgets.dart';
+import 'attendance_screen.dart';
+import 'detail_screens.dart';
+import 'fees_screen.dart';
+import 'notices_screen.dart';
+
+class MoreScreen extends StatelessWidget {
+  const MoreScreen({
+    super.key,
+    required this.uid,
+    required this.authService,
+    required this.repository,
+  });
+
+  final String uid;
+  final AuthService authService;
+  final PortalRepository repository;
+
+  @override
+  Widget build(BuildContext context) {
+    final items = <({IconData icon, String label, String sub, Widget page})>[
+      (
+        icon: Icons.receipt_long_outlined,
+        label: 'Fees & Challans',
+        sub: 'Your own fee entries and dues',
+        page: FeesScreen(uid: uid, repository: repository),
+      ),
+      (
+        icon: Icons.fact_check_outlined,
+        label: 'Attendance',
+        sub: 'Your attendance record per course',
+        page: AttendanceScreen(uid: uid, repository: repository),
+      ),
+      (
+        icon: Icons.campaign_outlined,
+        label: 'Notices',
+        sub: 'Announcements for all students',
+        page: NoticesScreen(uid: uid, repository: repository),
+      ),
+      (
+        icon: Icons.local_library_outlined,
+        label: 'Library',
+        sub: 'Campus library information',
+        page: const LibraryScreen(),
+      ),
+      (
+        icon: Icons.groups_outlined,
+        label: 'Faculty Directory',
+        sub: 'Teachers, emails and office hours',
+        page: const FacultyScreen(),
+      ),
+      (
+        icon: Icons.event_outlined,
+        label: 'Events',
+        sub: 'Seminars, fests and activities',
+        page: const EventsScreen(),
+      ),
+      (
+        icon: Icons.person_outline_rounded,
+        label: 'My Profile',
+        sub: 'Your student record and details',
+        page: ProfileScreen(
+          uid: uid,
+          authService: authService,
+          repository: repository,
+        ),
+      ),
+    ];
+
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
+      children: [
+        const ScreenTitle(
+          title: 'More',
+          subtitle: 'Everything else in your university portal',
+        ),
+        for (final item in items) ...[
+          GlassCard(
+            padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+            child: Material(
+              type: MaterialType.transparency,
+              child: ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xFF22D3EE).withValues(alpha: 0.14),
+                  ),
+                  child: Icon(item.icon, color: const Color(0xFF22D3EE)),
+                ),
+                title: Text(
+                  item.label,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
+                ),
+                subtitle: Text(
+                  item.sub,
+                  style: TextStyle(
+                    fontSize: 12.5,
+                    color: Colors.white.withValues(alpha: 0.55),
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.chevron_right_rounded,
+                  color: Colors.white38,
+                ),
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => item.page)),
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+        ],
+        GlassCard(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+          child: Material(
+            type: MaterialType.transparency,
+            child: ListTile(
+              leading: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: const Color(0xFFF87171).withValues(alpha: 0.14),
+                ),
+                child: const Icon(
+                  Icons.logout_rounded,
+                  color: Color(0xFFF87171),
+                ),
+              ),
+              title: const Text(
+                'Log Out',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFFF87171),
+                ),
+              ),
+              subtitle: Text(
+                'Sign out of your account',
+                style: TextStyle(
+                  fontSize: 12.5,
+                  color: Colors.white.withValues(alpha: 0.55),
+                ),
+              ),
+              onTap: () => authService.signOut(),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+        const InfoNote(),
+      ],
+    );
+  }
+}
