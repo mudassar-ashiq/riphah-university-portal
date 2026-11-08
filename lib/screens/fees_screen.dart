@@ -99,7 +99,7 @@ class _FeesScreenState extends State<FeesScreen> {
                           'Outstanding balance',
                           style: TextStyle(
                             fontSize: 13,
-                            color: Colors.white.withValues(alpha: 0.6),
+                            color: Color(0xFF5A6474),
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -108,13 +108,13 @@ class _FeesScreenState extends State<FeesScreen> {
                           style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.w800,
-                            color: Colors.white,
+                            color: Color(0xFF2F3648),
                           ),
                         ),
                         const SizedBox(height: 4),
                         const Text(
                           'From your own fee entries below',
-                          style: TextStyle(fontSize: 12.5, color: Colors.white54),
+                          style: TextStyle(fontSize: 12.5, color: Color(0xFF8A8F98)),
                         ),
                       ],
                     ),
@@ -127,7 +127,7 @@ class _FeesScreenState extends State<FeesScreen> {
                       padding: EdgeInsets.symmetric(vertical: 24),
                       child: Center(
                         child:
-                            CircularProgressIndicator(color: Color(0xFF22D3EE)),
+                            CircularProgressIndicator(color: Color(0xFF003366)),
                       ),
                     )
                   else if (fees.isEmpty)
@@ -150,7 +150,7 @@ class _FeesScreenState extends State<FeesScreen> {
                                     f.title,
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w600,
-                                      color: Colors.white,
+                                      color: Color(0xFF2F3648),
                                     ),
                                   ),
                                   const SizedBox(height: 3),
@@ -160,7 +160,7 @@ class _FeesScreenState extends State<FeesScreen> {
                                     style: TextStyle(
                                       fontSize: 12.5,
                                       color:
-                                          Colors.white.withValues(alpha: 0.6),
+                                          Color(0xFF5A6474),
                                     ),
                                   ),
                                 ],
@@ -170,10 +170,10 @@ class _FeesScreenState extends State<FeesScreen> {
                             PopupMenuButton<String>(
                               icon: const Icon(
                                 Icons.more_vert_rounded,
-                                color: Colors.white54,
+                                color: Color(0xFF8A8F98),
                                 size: 20,
                               ),
-                              color: const Color(0xFF0B1626),
+                              color: Colors.white,
                               onSelected: (action) {
                                 if (f.id == null) return;
                                 if (action == 'toggle') {
@@ -225,7 +225,7 @@ class _FeesScreenState extends State<FeesScreen> {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           const SizedBox(height: 14),
@@ -262,7 +262,7 @@ class _FeesScreenState extends State<FeesScreen> {
                     ),
                     child: Text(
                       formatDate(_dueDate),
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Color(0xFF2F3648)),
                     ),
                   ),
                 ),
@@ -277,7 +277,8 @@ class _FeesScreenState extends State<FeesScreen> {
               icon: const Icon(Icons.add_rounded, size: 18),
               label: const Text('Add fee'),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF0891B2),
+                backgroundColor: const Color(0xFFFFCC22),
+                foregroundColor: const Color(0xFF001E35),
               ),
             ),
           ),
@@ -294,7 +295,7 @@ class _PaidChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = paid ? const Color(0xFF34D399) : const Color(0xFFFBBF24);
+    final color = paid ? const Color(0xFF003366) : const Color(0xFFD97706);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
       decoration: BoxDecoration(

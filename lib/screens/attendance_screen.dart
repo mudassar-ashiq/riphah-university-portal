@@ -100,7 +100,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 return const Padding(
                   padding: EdgeInsets.symmetric(vertical: 24),
                   child: Center(
-                    child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+                    child: CircularProgressIndicator(color: Color(0xFF003366)),
                   ),
                 );
               }
@@ -132,14 +132,14 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                                   row.course,
                                   style: const TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.white,
+                                    color: Color(0xFF2F3648),
                                   ),
                                 ),
                               ),
                               IconButton(
                                 icon: const Icon(
                                   Icons.edit_outlined,
-                                  color: Colors.white54,
+                                  color: Color(0xFF8A8F98),
                                   size: 19,
                                 ),
                                 onPressed: () => _fillForm(row),
@@ -147,7 +147,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                               IconButton(
                                 icon: const Icon(
                                   Icons.delete_outline_rounded,
-                                  color: Colors.white54,
+                                  color: Color(0xFF8A8F98),
                                   size: 19,
                                 ),
                                 onPressed: row.id == null
@@ -163,7 +163,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                             'Attended ${row.attended} of ${row.held} classes',
                             style: TextStyle(
                               fontSize: 12.5,
-                              color: Colors.white.withValues(alpha: 0.6),
+                              color: Color(0xFF5A6474),
                             ),
                           ),
                           const SizedBox(height: 10),
@@ -201,9 +201,9 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
           icon: const Icon(Icons.playlist_add_rounded, size: 18),
           label: const Text('Add my six Semester 5 courses'),
           style: OutlinedButton.styleFrom(
-            foregroundColor: const Color(0xFF22D3EE),
+            foregroundColor: const Color(0xFF003366),
             side: BorderSide(
-              color: const Color(0xFF22D3EE).withValues(alpha: 0.5),
+              color: const Color(0xFF003366).withValues(alpha: 0.5),
             ),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
@@ -225,7 +225,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           const SizedBox(height: 14),
@@ -264,7 +264,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
               icon: const Icon(Icons.save_outlined, size: 18),
               label: const Text('Save'),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF0891B2),
+                backgroundColor: const Color(0xFFFFCC22),
+                foregroundColor: const Color(0xFF001E35),
               ),
             ),
           ),

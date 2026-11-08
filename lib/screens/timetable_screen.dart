@@ -27,7 +27,7 @@ class TimetableScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+            child: CircularProgressIndicator(color: Color(0xFF003366)),
           );
         }
         final profile = snapshot.data;
@@ -55,7 +55,7 @@ class TimetableScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
-                      color: Color(0xFF22D3EE),
+                      color: Color(0xFF003366),
                     ),
                   ),
                 ),
@@ -70,7 +70,7 @@ class TimetableScreen extends StatelessWidget {
                             const Icon(
                               Icons.schedule_rounded,
                               size: 18,
-                              color: Colors.white54,
+                              color: Color(0xFF8A8F98),
                             ),
                             const SizedBox(height: 4),
                             Text(
@@ -78,7 +78,7 @@ class TimetableScreen extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                                color: Color(0xFF2F3648),
                               ),
                             ),
                           ],
@@ -92,7 +92,7 @@ class TimetableScreen extends StatelessWidget {
                                 session.courseTitle,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.white,
+                                  color: Color(0xFF2F3648),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -101,7 +101,7 @@ class TimetableScreen extends StatelessWidget {
                                 '${session.room}',
                                 style: TextStyle(
                                   fontSize: 12.5,
-                                  color: Colors.white.withValues(alpha: 0.6),
+                                  color: Color(0xFF5A6474),
                                 ),
                               ),
                             ],

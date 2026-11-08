@@ -70,14 +70,14 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: const Color(0xFF0B1626),
+        backgroundColor: Colors.white,
         title: const Text(
           'Delete notice?',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFF2F3648)),
         ),
         content: Text(
           '\u201C${notice.title}\u201D will be removed for all students.',
-          style: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
+          style: TextStyle(color: Color(0xFF5A6474)),
         ),
         actions: [
           TextButton(
@@ -88,7 +88,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
             onPressed: () => Navigator.of(dialogContext).pop(true),
             child: const Text(
               'Delete',
-              style: TextStyle(color: Color(0xFFF87171)),
+              style: TextStyle(color: Color(0xFFDC2626)),
             ),
           ),
         ],
@@ -137,7 +137,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
-          color: Colors.white,
+          color: Color(0xFF2F3648),
         ),
       ),
     );
@@ -180,14 +180,14 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
       padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
       child: Column(
         children: [
-          Icon(icon, color: const Color(0xFF22D3EE), size: 24),
+          Icon(icon, color: const Color(0xFF003366), size: 24),
           const SizedBox(height: 8),
           Text(
             value,
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w800,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           const SizedBox(height: 2),
@@ -195,7 +195,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
             label,
             style: TextStyle(
               fontSize: 12.5,
-              color: Colors.white.withValues(alpha: 0.55),
+              color: Color(0xFF8A8F98),
             ),
           ),
         ],
@@ -211,7 +211,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
           return const Padding(
             padding: EdgeInsets.symmetric(vertical: 32),
             child: Center(
-              child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+              child: CircularProgressIndicator(color: Color(0xFF003366)),
             ),
           );
         }
@@ -244,7 +244,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
     final isSelf = profile.uid == widget.uid;
     final subStyle = TextStyle(
       fontSize: 12.5,
-      color: Colors.white.withValues(alpha: 0.55),
+      color: Color(0xFF8A8F98),
     );
     return GlassCard(
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 4),
@@ -255,18 +255,18 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: const Color(0xFF22D3EE).withValues(alpha: 0.14),
+              color: const Color(0xFF003366).withValues(alpha: 0.14),
             ),
             child: const Icon(
               Icons.person_outline_rounded,
-              color: Color(0xFF22D3EE),
+              color: Color(0xFF003366),
             ),
           ),
           title: Text(
             isSelf ? '${profile.name} (You)' : profile.name,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           subtitle: Column(
@@ -316,7 +316,8 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
               icon: const Icon(Icons.send_rounded, size: 17),
               label: const Text('Post notice'),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF0891B2),
+                backgroundColor: const Color(0xFFFFCC22),
+                foregroundColor: const Color(0xFF001E35),
               ),
             ),
           ),
@@ -333,7 +334,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
           return const Padding(
             padding: EdgeInsets.symmetric(vertical: 32),
             child: Center(
-              child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+              child: CircularProgressIndicator(color: Color(0xFF003366)),
             ),
           );
         }
@@ -367,7 +368,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                           ),
                           decoration: BoxDecoration(
                             color:
-                                const Color(0xFF22D3EE).withValues(alpha: 0.15),
+                                const Color(0xFF003366).withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(99),
                           ),
                           child: const Text(
@@ -375,7 +376,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                             style: TextStyle(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF22D3EE),
+                              color: Color(0xFF003366),
                             ),
                           ),
                         ),
@@ -385,13 +386,13 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                             formatDate(n.createdAt!),
                             style: const TextStyle(
                               fontSize: 12,
-                              color: Colors.white54,
+                              color: Color(0xFF8A8F98),
                             ),
                           ),
                         IconButton(
                           icon: const Icon(
                             Icons.delete_outline_rounded,
-                            color: Color(0xFFF87171),
+                            color: Color(0xFFDC2626),
                             size: 20,
                           ),
                           tooltip: 'Delete notice',
@@ -406,7 +407,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       style: const TextStyle(
                         fontSize: 15.5,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: Color(0xFF2F3648),
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -415,7 +416,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                       style: TextStyle(
                         fontSize: 13.5,
                         height: 1.45,
-                        color: Colors.white.withValues(alpha: 0.7),
+                        color: Color(0xFF5A6474),
                       ),
                     ),
                   ],

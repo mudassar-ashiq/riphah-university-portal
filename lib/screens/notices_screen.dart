@@ -63,14 +63,14 @@ class _NoticesScreenState extends State<NoticesScreen> {
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: const Color(0xFF0B1626),
+        backgroundColor: Colors.white,
         title: const Text(
           'Delete notice?',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Color(0xFF2F3648)),
         ),
         content: Text(
           '\u201C${notice.title}\u201D will be removed for all students.',
-          style: TextStyle(color: Colors.white.withValues(alpha: 0.7)),
+          style: TextStyle(color: Color(0xFF5A6474)),
         ),
         actions: [
           TextButton(
@@ -81,7 +81,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
             onPressed: () => Navigator.of(dialogContext).pop(true),
             child: const Text(
               'Delete',
-              style: TextStyle(color: Color(0xFFF87171)),
+              style: TextStyle(color: Color(0xFFDC2626)),
             ),
           ),
         ],
@@ -132,7 +132,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
           return const Padding(
             padding: EdgeInsets.symmetric(vertical: 32),
             child: Center(
-              child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+              child: CircularProgressIndicator(color: Color(0xFF003366)),
             ),
           );
         }
@@ -160,7 +160,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
                           ),
                           decoration: BoxDecoration(
                             color:
-                                const Color(0xFF22D3EE).withValues(alpha: 0.15),
+                                const Color(0xFF003366).withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(99),
                           ),
                           child: const Text(
@@ -168,7 +168,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
                             style: TextStyle(
                               fontSize: 11.5,
                               fontWeight: FontWeight.w600,
-                              color: Color(0xFF22D3EE),
+                              color: Color(0xFF003366),
                             ),
                           ),
                         ),
@@ -178,14 +178,14 @@ class _NoticesScreenState extends State<NoticesScreen> {
                             formatDate(n.createdAt!),
                             style: const TextStyle(
                               fontSize: 12,
-                              color: Colors.white54,
+                              color: Color(0xFF8A8F98),
                             ),
                           ),
                         if (isAdmin)
                           IconButton(
                             icon: const Icon(
                               Icons.delete_outline_rounded,
-                              color: Color(0xFFF87171),
+                              color: Color(0xFFDC2626),
                               size: 20,
                             ),
                             tooltip: 'Delete notice',
@@ -200,7 +200,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
                       style: const TextStyle(
                         fontSize: 15.5,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: Color(0xFF2F3648),
                       ),
                     ),
                     const SizedBox(height: 6),
@@ -209,7 +209,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
                       style: TextStyle(
                         fontSize: 13.5,
                         height: 1.45,
-                        color: Colors.white.withValues(alpha: 0.7),
+                        color: Color(0xFF5A6474),
                       ),
                     ),
                   ],
@@ -234,7 +234,7 @@ class _NoticesScreenState extends State<NoticesScreen> {
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           const SizedBox(height: 14),
@@ -262,7 +262,8 @@ class _NoticesScreenState extends State<NoticesScreen> {
               icon: const Icon(Icons.send_rounded, size: 17),
               label: const Text('Post notice'),
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xFF0891B2),
+                backgroundColor: const Color(0xFFFFCC22),
+                foregroundColor: const Color(0xFF001E35),
               ),
             ),
           ),

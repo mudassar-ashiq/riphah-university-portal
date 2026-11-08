@@ -22,7 +22,7 @@ class CoursesScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+            child: CircularProgressIndicator(color: Color(0xFF003366)),
           );
         }
         final profile = snapshot.data;
@@ -42,7 +42,7 @@ class CoursesScreen extends StatelessWidget {
                 'credit hours · Semester 5',
                 style: TextStyle(
                   fontSize: 13.5,
-                  color: Colors.white.withValues(alpha: 0.6),
+                  color: Color(0xFF5A6474),
                 ),
               ),
               const SizedBox(height: 16),
@@ -61,7 +61,7 @@ class CoursesScreen extends StatelessWidget {
                             ),
                             decoration: BoxDecoration(
                               color:
-                                  const Color(0xFF22D3EE).withValues(alpha: 0.15),
+                                  const Color(0xFF003366).withValues(alpha: 0.15),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Text(
@@ -69,7 +69,7 @@ class CoursesScreen extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 12.5,
                                 fontWeight: FontWeight.w700,
-                                color: Color(0xFF22D3EE),
+                                color: Color(0xFF003366),
                               ),
                             ),
                           ),
@@ -78,7 +78,7 @@ class CoursesScreen extends StatelessWidget {
                             '${course.creditHours} Cr Hrs',
                             style: const TextStyle(
                               fontSize: 12.5,
-                              color: Colors.white54,
+                              color: Color(0xFF8A8F98),
                             ),
                           ),
                         ],
@@ -89,7 +89,7 @@ class CoursesScreen extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Color(0xFF2F3648),
                         ),
                       ),
                       const SizedBox(height: 4),
@@ -97,7 +97,7 @@ class CoursesScreen extends StatelessWidget {
                         '${course.instructor} · ${course.room}',
                         style: TextStyle(
                           fontSize: 13,
-                          color: Colors.white.withValues(alpha: 0.6),
+                          color: Color(0xFF5A6474),
                         ),
                       ),
                     ],

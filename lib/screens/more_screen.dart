@@ -114,27 +114,27 @@ class MoreScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: const Color(0xFF22D3EE).withValues(alpha: 0.14),
+                    color: const Color(0xFF003366).withValues(alpha: 0.14),
                   ),
-                  child: Icon(item.icon, color: const Color(0xFF22D3EE)),
+                  child: Icon(item.icon, color: const Color(0xFF003366)),
                 ),
                 title: Text(
                   item.label,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Color(0xFF2F3648),
                   ),
                 ),
                 subtitle: Text(
                   item.sub,
                   style: TextStyle(
                     fontSize: 12.5,
-                    color: Colors.white.withValues(alpha: 0.55),
+                    color: Color(0xFF8A8F98),
                   ),
                 ),
                 trailing: const Icon(
                   Icons.chevron_right_rounded,
-                  color: Colors.white38,
+                  color: Color(0xFF8A8F98),
                 ),
                 onTap: () => Navigator.of(context)
                     .push(MaterialPageRoute(builder: (_) => item.page)),
@@ -152,25 +152,25 @@ class MoreScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
-                  color: const Color(0xFFF87171).withValues(alpha: 0.14),
+                  color: const Color(0xFFDC2626).withValues(alpha: 0.14),
                 ),
                 child: const Icon(
                   Icons.logout_rounded,
-                  color: Color(0xFFF87171),
+                  color: Color(0xFFDC2626),
                 ),
               ),
               title: const Text(
                 'Log Out',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFFF87171),
+                  color: Color(0xFFDC2626),
                 ),
               ),
               subtitle: Text(
                 'Sign out of your account',
                 style: TextStyle(
                   fontSize: 12.5,
-                  color: Colors.white.withValues(alpha: 0.55),
+                  color: Color(0xFF8A8F98),
                 ),
               ),
               onTap: () => authService.signOut(),
