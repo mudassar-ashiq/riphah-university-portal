@@ -50,6 +50,17 @@ const testProfile = UserProfile(
   email: 'f24-bsse-0077@students.riphah.edu.pk',
 );
 
+const adminProfile = UserProfile(
+  uid: 'admin-uid',
+  name: 'Mudassar Ashiq',
+  roll: 'F24-BSSE-0077',
+  program: 'BSSE',
+  semester: 5,
+  section: 'A',
+  email: 'f24-bsse-0077@students.riphah.edu.pk',
+  role: 'admin',
+);
+
 void main() {
   group('percentage computation', () {
     test('result percentage', () {
@@ -391,6 +402,186 @@ void main() {
 
       expect(find.text('Riphah University Portal'), findsOneWidget);
       expect(find.text('University email'), findsOneWidget);
+    });
+  });
+
+  group('fake repository admin support', () {
+    test('watchAllProfiles returns every profile sorted by name', () async {
+      final repo = FakePortalRepository();
+      await repo.createProfile(
+        const UserProfile(
+          uid: 'u2',
+          name: 'Zara Malik',
+          roll: 'F24-BSSE-0099',
+          program: 'BSSE',
+          semester: 5,
+          section: 'A',
+          email: 'zara@example.com',
+        ),
+      );
+      await repo.createProfile(
+        const UserProfile(
+          uid: 'u1',
+          name: 'Ali Raza',
+          roll: 'F24-BSCS-0003',
+          program: 'BSCS',
+          semester: 3,
+          section: 'B',
+          email: 'ali@example.com',
+        ),
+      );
+
+      final profiles = await repo.watchAllProfiles().first;
+      expect(profiles.map((p) => p.name), ['Ali Raza', 'Zara Malik']);
+    });
+
+    test('deleteNotice removes only that notice', () async {
+      final repo = FakePortalRepository();
+      await repo.postNotice(title: 'One', body: 'First');
+      await repo.postNotice(title: 'Two', body: 'Second');
+
+      await repo.deleteNotice(repo.noticeList.first.id!);
+
+      expect(repo.noticeList.map((n) => n.title), ['Two']);
+    });
+  });
+
+  group('admin panel (fake services)', () {
+    testWidgets('admin sees the Admin Panel tile in More', (tester) async {
+      final auth = FakeAuthService()..signInAs('admin-uid');
+      final repo = FakePortalRepository()
+        ..profiles['admin-uid'] = adminProfile;
+      await pumpApp(tester, auth: auth, repo: repo);
+
+      await tester.tap(find.text('More'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(find.text('Admin Panel'), findsOneWidget);
+    });
+
+    testWidgets('student does not see the Admin Panel tile in More', (
+      tester,
+    ) async {
+      final auth = FakeAuthService()..signInAs('test-uid');
+      final repo = FakePortalRepository()
+        ..profiles['test-uid'] = testProfile;
+      await pumpApp(tester, auth: auth, repo: repo);
+
+      await tester.tap(find.text('More'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(find.text('Admin Panel'), findsNothing);
+      expect(find.text('Fees & Challans'), findsOneWidget);
+    });
+
+    testWidgets('admin panel lists students with stats counts', (
+      tester,
+    ) async {
+      final auth = FakeAuthService()..signInAs('admin-uid');
+      final repo = FakePortalRepository()
+        ..profiles['admin-uid'] = adminProfile
+        ..profiles['s1'] = const UserProfile(
+          uid: 's1',
+          name: 'Ayesha Khan',
+          roll: 'F24-BSCS-0011',
+          program: 'BSCS',
+          semester: 3,
+          section: 'B',
+          email: 'ayesha@example.com',
+        )
+        ..profiles['s2'] = const UserProfile(
+          uid: 's2',
+          name: 'Bilal Ahmed',
+          roll: 'F24-BSSE-0042',
+          program: 'BSSE',
+          semester: 5,
+          section: 'A',
+          email: 'bilal@example.com',
+        );
+      await repo.postNotice(title: 'Welcome', body: 'Welcome to the portal.');
+      await repo.postNotice(title: 'Library hours', body: 'Open till 8 PM.');
+      await pumpApp(tester, auth: auth, repo: repo);
+
+      await tester.tap(find.text('More'));
+      await tester.pump();
+      await tester.tap(find.text('Admin Panel'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      // Header stats: 3 registered profiles, 2 posted notices.
+      expect(find.text('Students'), findsOneWidget);
+      expect(find.text('3'), findsOneWidget);
+      expect(find.text('Notices'), findsOneWidget);
+      expect(find.text('2'), findsOneWidget);
+
+      // Student list, name-sorted, with the admin marked as (You).
+      expect(find.text('Registered Students'), findsOneWidget);
+      expect(find.text('Ayesha Khan'), findsOneWidget);
+      expect(find.text('Bilal Ahmed'), findsOneWidget);
+      expect(find.text('Mudassar Ashiq (You)'), findsOneWidget);
+      expect(find.text('F24-BSCS-0011'), findsOneWidget);
+      expect(find.text('ayesha@example.com'), findsOneWidget);
+    });
+
+    testWidgets('posting a notice from the admin panel saves it', (
+      tester,
+    ) async {
+      final auth = FakeAuthService()..signInAs('admin-uid');
+      final repo = FakePortalRepository()
+        ..profiles['admin-uid'] = adminProfile;
+      await pumpApp(tester, auth: auth, repo: repo);
+
+      await tester.tap(find.text('More'));
+      await tester.pump();
+      await tester.tap(find.text('Admin Panel'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      await tester.enterText(find.byType(TextField).at(0), 'Exam week');
+      await tester.enterText(
+        find.byType(TextField).at(1),
+        'Midterms start on Monday.',
+      );
+      await tester.tap(find.text('Post notice'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(repo.noticeList.single.title, 'Exam week');
+      expect(repo.noticeList.single.body, 'Midterms start on Monday.');
+      expect(find.text('Exam week'), findsOneWidget);
+    });
+
+    testWidgets('deleting a notice from the admin panel removes it', (
+      tester,
+    ) async {
+      final repo = FakePortalRepository()
+        ..profiles['admin-uid'] = adminProfile;
+      await repo.postNotice(title: 'Old notice', body: 'Please ignore this.');
+      final auth = FakeAuthService()..signInAs('admin-uid');
+      await pumpApp(tester, auth: auth, repo: repo);
+
+      await tester.tap(find.text('More'));
+      await tester.pump();
+      await tester.tap(find.text('Admin Panel'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
+
+      expect(find.text('Old notice'), findsOneWidget);
+
+      await tester.tap(find.byIcon(Icons.delete_outline_rounded));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(find.text('Delete notice?'), findsOneWidget);
+
+      await tester.tap(find.text('Delete'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(repo.noticeList, isEmpty);
+      expect(find.text('Old notice'), findsNothing);
     });
   });
 }

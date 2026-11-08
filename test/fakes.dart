@@ -91,6 +91,15 @@ class FakePortalRepository implements PortalRepository {
   }
 
   @override
+  Stream<List<UserProfile>> watchAllProfiles() => _watch(() {
+        final list = profiles.values.toList();
+        list.sort(
+          (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+        );
+        return list;
+      });
+
+  @override
   Stream<List<ResultEntry>> resultsStream(String uid) =>
       _watch(() => List.of(resultsByUid[uid] ?? const []));
 
@@ -203,6 +212,12 @@ class FakePortalRepository implements PortalRepository {
         createdAt: DateTime.now(),
       ),
     );
+    _emit();
+  }
+
+  @override
+  Future<void> deleteNotice(String noticeId) async {
+    noticeList.removeWhere((n) => n.id == noticeId);
     _emit();
   }
 }

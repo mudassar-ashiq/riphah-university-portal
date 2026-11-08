@@ -7,12 +7,17 @@ import '../models/portal_models.dart';
 ///
 /// Paths (matching the published security rules):
 /// - users/{uid}, users/{uid}/results, users/{uid}/fees,
-///   users/{uid}/attendance — owner-only
+///   users/{uid}/attendance — subcollections are owner-only; admins may
+///   additionally READ any users/{uid} profile document
 /// - notices — readable by any signed-in user, writable by admins
 abstract class PortalRepository {
   Stream<UserProfile?> profileStream(String uid);
 
   Future<void> createProfile(UserProfile profile);
+
+  /// Admin-only (security rules): every registered profile, sorted by
+  /// name. Used by the admin panel's student list.
+  Stream<List<UserProfile>> watchAllProfiles();
 
   Stream<List<ResultEntry>> resultsStream(String uid);
   Future<void> addResult(String uid, ResultEntry entry);
@@ -32,6 +37,7 @@ abstract class PortalRepository {
 
   Stream<List<PortalNotice>> noticesStream();
   Future<void> postNotice({required String title, required String body});
+  Future<void> deleteNotice(String noticeId);
 }
 
 class FirestorePortalRepository implements PortalRepository {
@@ -60,6 +66,18 @@ class FirestorePortalRepository implements PortalRepository {
     return _userDoc(profile.uid).set({
       ...profile.toMap(),
       'createdAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+  @override
+  Stream<List<UserProfile>> watchAllProfiles() {
+    return _db.collection('users').snapshots().map((qs) {
+      final profiles =
+          qs.docs.map((d) => UserProfile.fromMap(d.id, d.data())).toList();
+      profiles.sort(
+        (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()),
+      );
+      return profiles;
     });
   }
 
@@ -191,5 +209,10 @@ class FirestorePortalRepository implements PortalRepository {
       'body': body,
       'createdAt': FieldValue.serverTimestamp(),
     });
+  }
+
+  @override
+  Future<void> deleteNotice(String noticeId) {
+    return _db.collection('notices').doc(noticeId).delete();
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../models/portal_models.dart';
 import '../services/auth_service.dart';
 import '../services/portal_repository.dart';
 import '../widgets/glass_card.dart';
 import '../widgets/section_widgets.dart';
+import 'admin_screen.dart';
 import 'attendance_screen.dart';
 import 'detail_screens.dart';
 import 'fees_screen.dart';
@@ -23,6 +25,17 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The Admin Panel tile is rendered only for profiles whose role
+    // is 'admin'; everyone else never sees it.
+    return StreamBuilder<UserProfile?>(
+      stream: repository.profileStream(uid),
+      builder: (context, snapshot) {
+        return _buildList(context, isAdmin: snapshot.data?.isAdmin == true);
+      },
+    );
+  }
+
+  Widget _buildList(BuildContext context, {required bool isAdmin}) {
     final items = <({IconData icon, String label, String sub, Widget page})>[
       (
         icon: Icons.receipt_long_outlined,
@@ -71,6 +84,18 @@ class MoreScreen extends StatelessWidget {
         ),
       ),
     ];
+
+    if (isAdmin) {
+      items.insert(
+        0,
+        (
+          icon: Icons.admin_panel_settings_outlined,
+          label: 'Admin Panel',
+          sub: 'Registered students and notices',
+          page: AdminPanelScreen(uid: uid, repository: repository),
+        ),
+      );
+    }
 
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 24),
