@@ -32,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+            child: CircularProgressIndicator(color: Color(0xFF003366)),
           );
         }
         final profile = snapshot.data;
@@ -72,9 +72,9 @@ class _ProfileMissing extends StatelessWidget {
             icon: const Icon(Icons.logout_rounded, size: 18),
             label: const Text('Log Out'),
             style: OutlinedButton.styleFrom(
-              foregroundColor: const Color(0xFFF87171),
+              foregroundColor: const Color(0xFFDC2626),
               side: BorderSide(
-                color: const Color(0xFFF87171).withValues(alpha: 0.5),
+                color: const Color(0xFFDC2626).withValues(alpha: 0.5),
               ),
             ),
           ),
@@ -121,7 +121,7 @@ class _DashboardBody extends StatelessWidget {
                       end: Alignment.bottomCenter,
                       colors: [
                         Colors.transparent,
-                        const Color(0xFF050B14).withValues(alpha: 0.85),
+                        const Color(0xFF001E35).withValues(alpha: 0.85),
                       ],
                     ),
                   ),
@@ -140,7 +140,7 @@ class _DashboardBody extends StatelessWidget {
                         Icon(
                           Icons.school_rounded,
                           size: 19,
-                          color: Color(0xFF22D3EE),
+                          color: Color(0xFFFFCC22),
                         ),
                         SizedBox(width: 10),
                         Expanded(
@@ -176,13 +176,13 @@ class _DashboardBody extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 26,
-              backgroundColor: const Color(0xFF22D3EE).withValues(alpha: 0.18),
+              backgroundColor: const Color(0xFF003366).withValues(alpha: 0.18),
               child: Text(
                 _initial,
                 style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xFF22D3EE),
+                  color: Color(0xFF003366),
                 ),
               ),
             ),
@@ -193,21 +193,21 @@ class _DashboardBody extends StatelessWidget {
                 children: [
                   const Text(
                     'Assalam-o-Alaikum,',
-                    style: TextStyle(fontSize: 13, color: Colors.white60),
+                    style: TextStyle(fontSize: 13, color: Color(0xFF5A6474)),
                   ),
                   Text(
                     profile.name,
                     style: const TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      color: Color(0xFF2F3648),
                     ),
                   ),
                   Text(
                     '${profile.roll} · Section ${profile.section}',
                     style: TextStyle(
                       fontSize: 12.5,
-                      color: Colors.white.withValues(alpha: 0.55),
+                      color: Color(0xFF8A8F98),
                     ),
                   ),
                 ],
@@ -224,7 +224,7 @@ class _DashboardBody extends StatelessWidget {
               ),
               icon: const Icon(
                 Icons.notifications_none_rounded,
-                color: Colors.white,
+                color: Color(0xFF2F3648),
               ),
             ),
           ],
@@ -242,7 +242,7 @@ class _DashboardBody extends StatelessWidget {
                       'Semester',
                       style: TextStyle(
                         fontSize: 12.5,
-                        color: Colors.white.withValues(alpha: 0.6),
+                        color: Color(0xFF5A6474),
                       ),
                     ),
                     const SizedBox(height: 4),
@@ -251,13 +251,13 @@ class _DashboardBody extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                        color: Color(0xFF2F3648),
                       ),
                     ),
                     Text(
                       profile.program,
                       style:
-                          const TextStyle(fontSize: 12, color: Colors.white54),
+                          const TextStyle(fontSize: 12, color: Color(0xFF8A8F98)),
                     ),
                   ],
                 ),
@@ -280,7 +280,7 @@ class _DashboardBody extends StatelessWidget {
                           'Fees pending',
                           style: TextStyle(
                             fontSize: 12.5,
-                            color: Colors.white.withValues(alpha: 0.6),
+                            color: Color(0xFF5A6474),
                           ),
                         ),
                         const SizedBox(height: 4),
@@ -289,12 +289,12 @@ class _DashboardBody extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.w800,
-                            color: Colors.white,
+                            color: Color(0xFF2F3648),
                           ),
                         ),
                         const Text(
                           'From your own fee entries',
-                          style: TextStyle(fontSize: 12, color: Colors.white54),
+                          style: TextStyle(fontSize: 12, color: Color(0xFF8A8F98)),
                         ),
                       ],
                     ),
@@ -310,7 +310,7 @@ class _DashboardBody extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: Color(0xFF2F3648),
           ),
         ),
         const SizedBox(height: 12),
@@ -367,7 +367,7 @@ class _DashboardBody extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w700,
-              color: Colors.white,
+              color: Color(0xFF2F3648),
             ),
           ),
           const SizedBox(height: 12),
@@ -379,10 +379,10 @@ class _DashboardBody extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: const Color(0xFF22D3EE).withValues(alpha: 0.15),
+                    color: const Color(0xFF003366).withValues(alpha: 0.15),
                   ),
                   child:
-                      const Icon(Icons.code_rounded, color: Color(0xFF22D3EE)),
+                      const Icon(Icons.code_rounded, color: Color(0xFF003366)),
                 ),
                 const SizedBox(width: 14),
                 const Expanded(
@@ -393,17 +393,17 @@ class _DashboardBody extends StatelessWidget {
                         'Software Construction and Development',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: Colors.white,
+                          color: Color(0xFF2F3648),
                         ),
                       ),
                       SizedBox(height: 2),
                       Text(
                         'Monday · 08:30 – 09:30 · Room B4',
-                        style: TextStyle(fontSize: 12.5, color: Colors.white60),
+                        style: TextStyle(fontSize: 12.5, color: Color(0xFF5A6474)),
                       ),
                       Text(
                         'Ms Afia Afzaal',
-                        style: TextStyle(fontSize: 12.5, color: Colors.white60),
+                        style: TextStyle(fontSize: 12.5, color: Color(0xFF5A6474)),
                       ),
                     ],
                   ),
@@ -418,7 +418,7 @@ class _DashboardBody extends StatelessWidget {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: Color(0xFF2F3648),
           ),
         ),
         const SizedBox(height: 12),
@@ -433,7 +433,7 @@ class _DashboardBody extends StatelessWidget {
                   'No notices yet. New announcements will appear here.',
                   style: TextStyle(
                     fontSize: 13.5,
-                    color: Colors.white.withValues(alpha: 0.65),
+                    color: Color(0xFF5A6474),
                   ),
                 ),
               );
@@ -455,7 +455,7 @@ class _DashboardBody extends StatelessWidget {
                                 formatDate(notice.createdAt!),
                                 style: const TextStyle(
                                   fontSize: 12,
-                                  color: Colors.white54,
+                                  color: Color(0xFF8A8F98),
                                 ),
                               ),
                           ],
@@ -465,7 +465,7 @@ class _DashboardBody extends StatelessWidget {
                           notice.title,
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: Color(0xFF2F3648),
                           ),
                         ),
                       ],
@@ -503,11 +503,11 @@ class _QuickAction extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: const Color(0xFF22D3EE), size: 24),
+            Icon(icon, color: const Color(0xFF003366), size: 24),
             const SizedBox(height: 8),
             Text(
               label,
-              style: const TextStyle(fontSize: 12.5, color: Colors.white),
+              style: const TextStyle(fontSize: 12.5, color: Color(0xFF2F3648)),
             ),
           ],
         ),
@@ -524,7 +524,7 @@ class _NoticeChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFF22D3EE).withValues(alpha: 0.15),
+        color: const Color(0xFF003366).withValues(alpha: 0.15),
         borderRadius: BorderRadius.circular(99),
       ),
       child: const Text(
@@ -532,7 +532,7 @@ class _NoticeChip extends StatelessWidget {
         style: TextStyle(
           fontSize: 11.5,
           fontWeight: FontWeight.w600,
-          color: Color(0xFF22D3EE),
+          color: Color(0xFF003366),
         ),
       ),
     );

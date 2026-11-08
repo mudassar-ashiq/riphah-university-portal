@@ -8,8 +8,9 @@ import '../widgets/glass_card.dart';
 import '../widgets/glow_background.dart';
 import '../widgets/section_widgets.dart';
 
-/// Base for the pushed detail pages so they keep the same glow
-/// background and glass cards as the tab screens.
+/// Base for the pushed detail pages: a navy gradient header in the
+/// official Riphah colours over the cream background, so they match
+/// the tab screens.
 class DetailScaffold extends StatelessWidget {
   const DetailScaffold({super.key, required this.title, required this.child});
 
@@ -20,8 +21,17 @@ class DetailScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFF001E35),
         elevation: 0,
+        flexibleSpace: const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [Color(0xFF001E35), Color(0xFF003366)],
+            ),
+          ),
+        ),
         title: Text(
           title,
           style: const TextStyle(
@@ -55,9 +65,9 @@ class LibraryScreen extends StatelessWidget {
             padding: const EdgeInsets.all(11),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: const Color(0xFF22D3EE).withValues(alpha: 0.14),
+              color: const Color(0xFF003366).withValues(alpha: 0.14),
             ),
-            child: Icon(icon, color: const Color(0xFF22D3EE)),
+            child: Icon(icon, color: const Color(0xFF003366)),
           ),
           const SizedBox(width: 14),
           Expanded(
@@ -68,7 +78,7 @@ class LibraryScreen extends StatelessWidget {
                   title,
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Color(0xFF2F3648),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -77,7 +87,7 @@ class LibraryScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 13,
                     height: 1.45,
-                    color: Colors.white.withValues(alpha: 0.65),
+                    color: Color(0xFF5A6474),
                   ),
                 ),
               ],
@@ -152,7 +162,7 @@ class FacultyScreen extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 22,
-                    backgroundColor: const Color(0xFF22D3EE)
+                    backgroundColor: const Color(0xFF003366)
                         .withValues(alpha: 0.16),
                     child: Text(
                       f.name
@@ -161,7 +171,7 @@ class FacultyScreen extends StatelessWidget {
                           .replaceAll('Mr ', '')[0],
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
-                        color: Color(0xFF22D3EE),
+                        color: Color(0xFF003366),
                       ),
                     ),
                   ),
@@ -174,7 +184,7 @@ class FacultyScreen extends StatelessWidget {
                           f.name,
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                            color: Color(0xFF2F3648),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -182,21 +192,21 @@ class FacultyScreen extends StatelessWidget {
                           '${f.role} · ${f.department}',
                           style: TextStyle(
                             fontSize: 12.5,
-                            color: Colors.white.withValues(alpha: 0.6),
+                            color: Color(0xFF5A6474),
                           ),
                         ),
                         Text(
                           f.email,
                           style: const TextStyle(
                             fontSize: 12.5,
-                            color: Colors.white54,
+                            color: Color(0xFF8A8F98),
                           ),
                         ),
                         Text(
                           'Office hours: ${f.officeHours}',
                           style: const TextStyle(
                             fontSize: 12.5,
-                            color: Colors.white54,
+                            color: Color(0xFF8A8F98),
                           ),
                         ),
                       ],
@@ -235,14 +245,14 @@ class EventsScreen extends StatelessWidget {
                       const Icon(
                         Icons.event_rounded,
                         size: 18,
-                        color: Color(0xFF22D3EE),
+                        color: Color(0xFF003366),
                       ),
                       const SizedBox(width: 8),
                       Text(
                         e.date,
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF22D3EE),
+                          color: Color(0xFF003366),
                         ),
                       ),
                       const Spacer(),
@@ -250,7 +260,7 @@ class EventsScreen extends StatelessWidget {
                         e.venue,
                         style: const TextStyle(
                           fontSize: 12.5,
-                          color: Colors.white54,
+                          color: Color(0xFF8A8F98),
                         ),
                       ),
                     ],
@@ -261,7 +271,7 @@ class EventsScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 15.5,
                       fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      color: Color(0xFF2F3648),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -270,7 +280,7 @@ class EventsScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 13.5,
                       height: 1.45,
-                      color: Colors.white.withValues(alpha: 0.7),
+                      color: Color(0xFF5A6474),
                     ),
                   ),
                 ],
@@ -311,7 +321,7 @@ class ProfileScreen extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.white.withValues(alpha: 0.55),
+                color: Color(0xFF8A8F98),
               ),
             ),
           ),
@@ -321,7 +331,7 @@ class ProfileScreen extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 13.5,
                 fontWeight: FontWeight.w500,
-                color: Colors.white,
+                color: Color(0xFF2F3648),
               ),
             ),
           ),
@@ -339,7 +349,7 @@ class ProfileScreen extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+              child: CircularProgressIndicator(color: Color(0xFF003366)),
             );
           }
           final profile = snapshot.data;
@@ -364,13 +374,14 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 34,
-                      backgroundColor: const Color(0x2922D3EE),
+                      backgroundColor:
+                          const Color(0xFF003366).withValues(alpha: 0.12),
                       child: Text(
                         initial,
                         style: const TextStyle(
                           fontSize: 26,
                           fontWeight: FontWeight.w700,
-                          color: Color(0xFF22D3EE),
+                          color: Color(0xFF003366),
                         ),
                       ),
                     ),
@@ -380,7 +391,7 @@ class ProfileScreen extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.w700,
-                        color: Colors.white,
+                        color: Color(0xFF2F3648),
                       ),
                     ),
                     const SizedBox(height: 2),
@@ -388,7 +399,7 @@ class ProfileScreen extends StatelessWidget {
                       profile.program,
                       style: TextStyle(
                         fontSize: 13,
-                        color: Colors.white.withValues(alpha: 0.6),
+                        color: Color(0xFF5A6474),
                       ),
                     ),
                   ],
@@ -418,25 +429,25 @@ class ProfileScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
-                        color: const Color(0xFFF87171).withValues(alpha: 0.14),
+                        color: const Color(0xFFDC2626).withValues(alpha: 0.14),
                       ),
                       child: const Icon(
                         Icons.logout_rounded,
-                        color: Color(0xFFF87171),
+                        color: Color(0xFFDC2626),
                       ),
                     ),
                     title: const Text(
                       'Log Out',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFFF87171),
+                        color: Color(0xFFDC2626),
                       ),
                     ),
                     subtitle: Text(
                       'Sign out of your account',
                       style: TextStyle(
                         fontSize: 12.5,
-                        color: Colors.white.withValues(alpha: 0.55),
+                        color: Color(0xFF8A8F98),
                       ),
                     ),
                     onTap: () async {

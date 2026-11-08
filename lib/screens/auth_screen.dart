@@ -7,7 +7,7 @@ import '../widgets/glass_card.dart';
 import '../widgets/glow_background.dart';
 import '../widgets/section_widgets.dart';
 
-/// Glass login / sign up screen. Uses real Firebase accounts:
+/// Login / sign up screen. Uses real Firebase accounts:
 /// sign up creates the auth user and writes the student's profile
 /// document to Firestore; login signs in with FirebaseAuth. The
 /// [AuthGate] in main.dart swaps to the portal when sign-in succeeds.
@@ -159,7 +159,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   end: Alignment.bottomCenter,
                                   colors: [
                                     Colors.transparent,
-                                    const Color(0xFF050B14)
+                                    const Color(0xFF001E35)
                                         .withValues(alpha: 0.85),
                                   ],
                                 ),
@@ -179,6 +179,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontWeight: FontWeight.w700,
+                                    fontFamily: 'serif',
                                     color: Colors.white,
                                   ),
                                 ),
@@ -205,7 +206,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 13.5,
-                        color: Colors.white.withValues(alpha: 0.65),
+                        color: Color(0xFF5A6474),
                       ),
                     ),
                     const SizedBox(height: 28),
@@ -276,7 +277,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                             initialValue: _semester,
                                             isExpanded: true,
                                             dropdownColor:
-                                                const Color(0xFF0B1626),
+                                                Colors.white,
                                             decoration: glassFieldDecoration(
                                               label: 'Semester',
                                             ),
@@ -363,53 +364,33 @@ class _AuthScreenState extends State<AuthScreen> {
                             SizedBox(
                               width: double.infinity,
                               height: 52,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(14),
-                                  gradient: const LinearGradient(
-                                    colors: [
-                                      Color(0xFF06B6D4),
-                                      Color(0xFF2563EB),
-                                    ],
-                                    begin: Alignment.centerLeft,
-                                    end: Alignment.centerRight,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: const Color(0xFF06B6D4)
-                                          .withValues(alpha: 0.4),
-                                      blurRadius: 18,
-                                      offset: const Offset(0, 8),
-                                    ),
-                                  ],
+                              child: ElevatedButton(
+                                onPressed: _busy ? null : _submit,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFFFFCC22),
+                                  foregroundColor: const Color(0xFF001E35),
+                                  elevation: 2,
+                                  shadowColor: const Color(0xFF001E35)
+                                      .withValues(alpha: 0.25),
+                                  shape: const StadiumBorder(),
                                 ),
-                                child: ElevatedButton(
-                                  onPressed: _busy ? null : _submit,
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.transparent,
-                                    shadowColor: Colors.transparent,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(14),
-                                    ),
-                                  ),
-                                  child: _busy
-                                      ? const SizedBox(
-                                          width: 22,
-                                          height: 22,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2.5,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      : Text(
-                                          _isLogin ? 'Log In' : 'Sign Up',
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white,
-                                          ),
+                                child: _busy
+                                    ? const SizedBox(
+                                        width: 22,
+                                        height: 22,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2.5,
+                                          color: Color(0xFF001E35),
                                         ),
-                                ),
+                                      )
+                                    : Text(
+                                        _isLogin ? 'Log In' : 'Sign Up',
+                                        style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w700,
+                                          color: Color(0xFF001E35),
+                                        ),
+                                      ),
                               ),
                             ),
                           ],
@@ -423,7 +404,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white.withValues(alpha: 0.45),
+                        color: Color(0xFF8A8F98),
                       ),
                     ),
                   ],
@@ -449,9 +430,11 @@ class _ModeToggle extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.07),
+        color: const Color(0xFFF7F5EA),
         borderRadius: BorderRadius.circular(999),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+        border: Border.all(
+          color: const Color(0xFF003366).withValues(alpha: 0.12),
+        ),
       ),
       child: Row(
         children: [
@@ -472,11 +455,7 @@ class _ModeToggle extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(999),
-            gradient: selected
-                ? const LinearGradient(
-                    colors: [Color(0xFF06B6D4), Color(0xFF2563EB)],
-                  )
-                : null,
+            color: selected ? const Color(0xFFFFCC22) : null,
           ),
           child: Text(
             label,
@@ -484,8 +463,8 @@ class _ModeToggle extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w600,
               color: selected
-                  ? Colors.white
-                  : Colors.white.withValues(alpha: 0.65),
+                  ? const Color(0xFF001E35)
+                  : const Color(0xFF5A6474),
             ),
           ),
         ),

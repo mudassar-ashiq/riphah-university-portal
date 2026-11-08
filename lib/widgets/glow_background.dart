@@ -1,37 +1,27 @@
 import 'package:flutter/material.dart';
 
-/// Dark backdrop with two large, slowly drifting glow blobs (cyan and
-/// violet). The glass card sits on top and blurs this light through.
-class GlowBackground extends StatefulWidget {
+/// Warm cream backdrop in the official Riphah colours, with very
+/// subtle navy and gold tints in opposite corners. (This widget used
+/// to render the animated dark glow background — same place in the
+/// tree, new light look.)
+class GlowBackground extends StatelessWidget {
   const GlowBackground({super.key, required this.child});
 
   final Widget child;
 
-  @override
-  State<GlowBackground> createState() => _GlowBackgroundState();
-}
-
-class _GlowBackgroundState extends State<GlowBackground>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    vsync: this,
-    duration: const Duration(seconds: 14),
-  )..repeat(reverse: true);
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  Widget _blob(double size, Color color) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [color.withValues(alpha: 0.55), color.withValues(alpha: 0.0)],
+  Widget _tint(double size, Color color) {
+    return IgnorePointer(
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: RadialGradient(
+            colors: [
+              color.withValues(alpha: 0.07),
+              color.withValues(alpha: 0.0),
+            ],
+          ),
         ),
       ),
     );
@@ -39,33 +29,22 @@ class _GlowBackgroundState extends State<GlowBackground>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, _) {
-        final t = Curves.easeInOut.transform(_controller.value);
-        return Stack(
-          fit: StackFit.expand,
-          children: [
-            const ColoredBox(color: Color(0xFF050B14)),
-            Positioned(
-              top: -90 + t * 50,
-              left: -70 + t * 90,
-              child: _blob(320, const Color(0xFF0891B2)),
-            ),
-            Positioned(
-              bottom: -110 + t * 40,
-              right: -60 - t * 70,
-              child: _blob(360, const Color(0xFF6D28D9)),
-            ),
-            Positioned(
-              top: 240 - t * 60,
-              right: 30 + t * 40,
-              child: _blob(150, const Color(0xFF0EA5E9)),
-            ),
-            widget.child,
-          ],
-        );
-      },
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        const ColoredBox(color: Color(0xFFF7F5EA)),
+        Positioned(
+          top: -120,
+          right: -80,
+          child: _tint(300, const Color(0xFF003366)),
+        ),
+        Positioned(
+          bottom: -140,
+          left: -90,
+          child: _tint(340, const Color(0xFFFFCC22)),
+        ),
+        child,
+      ],
     );
   }
 }

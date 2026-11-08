@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Shared building blocks so every portal screen keeps the same
-/// glass look: screen title, small label, progress bar, form fields.
+/// Riphah look: screen title, small label, progress bar, form fields.
 class ScreenTitle extends StatelessWidget {
   const ScreenTitle({super.key, required this.title, this.subtitle});
 
@@ -18,7 +18,8 @@ class ScreenTitle extends StatelessWidget {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            fontFamily: 'serif',
+            color: Color(0xFF2F3648),
           ),
         ),
         if (subtitle != null) ...[
@@ -27,7 +28,7 @@ class ScreenTitle extends StatelessWidget {
             subtitle!,
             style: TextStyle(
               fontSize: 13.5,
-              color: Colors.white.withValues(alpha: 0.6),
+              color: Color(0xFF5A6474),
             ),
           ),
         ],
@@ -43,9 +44,9 @@ class AttendanceBar extends StatelessWidget {
   final double value; // 0-100
 
   Color get _color {
-    if (value >= 85) return const Color(0xFF34D399);
-    if (value >= 75) return const Color(0xFFFBBF24);
-    return const Color(0xFFF87171);
+    if (value >= 85) return const Color(0xFF003366);
+    if (value >= 75) return const Color(0xFFD97706);
+    return const Color(0xFFDC2626);
   }
 
   @override
@@ -58,7 +59,7 @@ class AttendanceBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: value / 100,
               minHeight: 7,
-              backgroundColor: Colors.white.withValues(alpha: 0.12),
+              backgroundColor: Color(0xFF003366).withValues(alpha: 0.12),
               valueColor: AlwaysStoppedAnimation(_color),
             ),
           ),
@@ -77,7 +78,8 @@ class AttendanceBar extends StatelessWidget {
   }
 }
 
-/// The standard glass text-field look, shared by all forms.
+/// The standard text-field look, shared by all forms: cream fill,
+/// soft navy border, navy focus ring.
 InputDecoration glassFieldDecoration({
   required String label,
   IconData? icon,
@@ -93,14 +95,14 @@ InputDecoration glassFieldDecoration({
     hintText: hint,
     prefixIcon: icon == null ? null : Icon(icon, size: 20),
     filled: true,
-    fillColor: Colors.white.withValues(alpha: 0.06),
-    labelStyle: TextStyle(color: Colors.white.withValues(alpha: 0.75)),
-    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.35)),
-    border: border(Colors.white.withValues(alpha: 0.15)),
-    enabledBorder: border(Colors.white.withValues(alpha: 0.15)),
-    focusedBorder: border(const Color(0xFF22D3EE), 1.6),
-    errorBorder: border(const Color(0xFFF87171)),
-    focusedErrorBorder: border(const Color(0xFFF87171), 1.6),
+    fillColor: const Color(0xFFF7F5EA),
+    labelStyle: const TextStyle(color: Color(0xFF5A6474)),
+    hintStyle: const TextStyle(color: Color(0xFF8A8F98)),
+    border: border(const Color(0xFF003366).withValues(alpha: 0.18)),
+    enabledBorder: border(const Color(0xFF003366).withValues(alpha: 0.18)),
+    focusedBorder: border(const Color(0xFF003366), 1.6),
+    errorBorder: border(const Color(0xFFDC2626)),
+    focusedErrorBorder: border(const Color(0xFFDC2626), 1.6),
   );
 }
 
@@ -126,7 +128,7 @@ class EmptyState extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 44, color: Colors.white.withValues(alpha: 0.35)),
+          Icon(icon, size: 44, color: Color(0xFF8A8F98)),
           const SizedBox(height: 14),
           Text(
             message,
@@ -134,7 +136,7 @@ class EmptyState extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               height: 1.45,
-              color: Colors.white.withValues(alpha: 0.65),
+              color: Color(0xFF5A6474),
             ),
           ),
           if (actionLabel != null && onAction != null) ...[
@@ -144,9 +146,9 @@ class EmptyState extends StatelessWidget {
               icon: const Icon(Icons.add_rounded, size: 18),
               label: Text(actionLabel!),
               style: OutlinedButton.styleFrom(
-                foregroundColor: const Color(0xFF22D3EE),
+                foregroundColor: const Color(0xFF003366),
                 side: BorderSide(
-                  color: const Color(0xFF22D3EE).withValues(alpha: 0.5),
+                  color: const Color(0xFF003366).withValues(alpha: 0.5),
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -174,7 +176,7 @@ class InfoNote extends StatelessWidget {
         'project — it is not Riphah\u2019s official system.',
         style: TextStyle(
           fontSize: 12,
-          color: Colors.white.withValues(alpha: 0.4),
+          color: Color(0xFF8A8F98),
         ),
       ),
     );

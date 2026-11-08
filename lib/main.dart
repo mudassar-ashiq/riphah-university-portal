@@ -6,6 +6,7 @@ import 'screens/auth_screen.dart';
 import 'screens/main_shell.dart';
 import 'services/auth_service.dart';
 import 'services/portal_repository.dart';
+import 'theme.dart';
 import 'widgets/glow_background.dart';
 
 Future<void> main() async {
@@ -31,16 +32,7 @@ class UniversityPortalApp extends StatelessWidget {
     return MaterialApp(
       title: 'Riphah University Portal',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF050B14),
-        colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF22D3EE),
-          secondary: Color(0xFF38BDF8),
-          surface: Color(0xFF0B1626),
-        ),
-      ),
+      theme: buildRiphahTheme(),
       home: AuthGate(authService: auth, repository: repo),
     );
   }
@@ -67,7 +59,7 @@ class AuthGate extends StatelessWidget {
           return const Scaffold(
             body: GlowBackground(
               child: Center(
-                child: CircularProgressIndicator(color: Color(0xFF22D3EE)),
+                child: CircularProgressIndicator(color: Color(0xFF003366)),
               ),
             ),
           );

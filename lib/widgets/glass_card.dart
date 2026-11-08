@@ -1,9 +1,8 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-/// A frosted-glass container: real backdrop blur, a translucent fill
-/// and a soft light border, like the card in glassmorphism UIs.
+/// A white content card in the official Riphah style: 20px radius
+/// and a soft shadow on the cream background. (Formerly the frosted
+/// "glass" card — same widget and API, new light look.)
 class GlassCard extends StatelessWidget {
   const GlassCard({
     super.key,
@@ -16,27 +15,23 @@ class GlassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(28),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 18, sigmaY: 18),
-        child: Container(
-          padding: padding,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(28),
-            color: Colors.white.withValues(alpha: 0.08),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.18)),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.35),
-                blurRadius: 40,
-                offset: const Offset(0, 20),
-              ),
-            ],
-          ),
-          child: child,
+    return Container(
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: const Color(0xFF003366).withValues(alpha: 0.06),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF001E35).withValues(alpha: 0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
+          ),
+        ],
       ),
+      child: child,
     );
   }
 }

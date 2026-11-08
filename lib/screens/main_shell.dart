@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../services/auth_service.dart';
@@ -10,8 +8,9 @@ import 'more_screen.dart';
 import 'results_screen.dart';
 import 'timetable_screen.dart';
 
-/// App shell: the five portal tabs inside one glow background, with a
-/// floating frosted-glass bottom navigation bar.
+/// App shell: the five portal tabs on the cream background, with a
+/// floating white bottom navigation bar in the Riphah colours —
+/// navy for the selected tab and a small gold indicator above it.
 class MainShell extends StatefulWidget {
   const MainShell({
     super.key,
@@ -57,72 +56,38 @@ class _MainShellState extends State<MainShell> {
 
   @override
   Widget build(BuildContext context) {
-    // GlowBackground is applied per-screen in detail pages; the shell
-    // uses the same dark backdrop colour plus its own positioned glows
-    // through a Stack so tab switches stay instant.
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          const ColoredBox(color: Color(0xFF050B14)),
-          Positioned(
-            top: -100,
-            left: -70,
-            child: _glow(300, const Color(0xFF0891B2)),
-          ),
-          Positioned(
-            bottom: -120,
-            right: -60,
-            child: _glow(340, const Color(0xFF6D28D9)),
-          ),
-          SafeArea(
-            child: IndexedStack(index: _index, children: _screens),
-          ),
-        ],
+      body: SafeArea(
+        child: IndexedStack(index: _index, children: _screens),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 16, sigmaY: 16),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                color: Colors.white.withValues(alpha: 0.08),
-                border: Border.all(color: Colors.white.withValues(alpha: 0.16)),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  for (var i = 0; i < _tabs.length; i++)
-                    _NavItem(
-                      icon: _tabs[i].icon,
-                      label: _tabs[i].label,
-                      selected: i == _index,
-                      onTap: () => setState(() => _index = i),
-                    ),
-                ],
-              ),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: const Color(0xFF003366).withValues(alpha: 0.06),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: const Color(0xFF001E35).withValues(alpha: 0.12),
+                blurRadius: 24,
+                offset: const Offset(0, 8),
+              ),
+            ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _glow(double size, Color color) {
-    return IgnorePointer(
-      child: Container(
-        width: size,
-        height: size,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          gradient: RadialGradient(
-            colors: [
-              color.withValues(alpha: 0.5),
-              color.withValues(alpha: 0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              for (var i = 0; i < _tabs.length; i++)
+                _NavItem(
+                  icon: _tabs[i].icon,
+                  label: _tabs[i].label,
+                  selected: i == _index,
+                  onTap: () => setState(() => _index = i),
+                ),
             ],
           ),
         ),
@@ -146,39 +111,35 @@ class _NavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = selected
+        ? const Color(0xFF003366)
+        : const Color(0xFF8A8F98);
     return GestureDetector(
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16),
-          gradient: selected
-              ? const LinearGradient(
-                  colors: [Color(0xFF06B6D4), Color(0xFF2563EB)],
-                )
-              : null,
-        ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              icon,
-              size: 21,
-              color: selected
-                  ? Colors.white
-                  : Colors.white.withValues(alpha: 0.55),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              width: 18,
+              height: 3,
+              decoration: BoxDecoration(
+                color: selected ? const Color(0xFFFFCC22) : Colors.transparent,
+                borderRadius: BorderRadius.circular(99),
+              ),
             ),
+            const SizedBox(height: 5),
+            Icon(icon, size: 21, color: color),
             const SizedBox(height: 2),
             Text(
               label,
               style: TextStyle(
                 fontSize: 10.5,
                 fontWeight: FontWeight.w600,
-                color: selected
-                    ? Colors.white
-                    : Colors.white.withValues(alpha: 0.55),
+                color: color,
               ),
             ),
           ],
