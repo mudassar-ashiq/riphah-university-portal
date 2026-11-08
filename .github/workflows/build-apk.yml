@@ -1,0 +1,37 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Add Android platform files
+        run: flutter create --platforms=android .
+
+      - name: Set app name
+        run: sed -i 's/android:label="university_portal"/android:label="Riphah Portal"/' android/app/src/main/AndroidManifest.xml
+
+      - name: Build release APK
+        run: flutter build apk --release
+
+      - name: Publish APK to Releases
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: apk-latest
+          name: Riphah Portal — Android APK
+          body: Installable Android APK of the Riphah University Portal app. Download app-release.apk and open it on your phone to install.
+          files: build/app/outputs/flutter-apk/app-release.apk
