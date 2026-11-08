@@ -22,6 +22,11 @@ jobs:
       - name: Add Android platform files
         run: flutter create --platforms=android .
 
+      - name: Set building app icon
+        run: |
+          cp -r android_icons/* android/app/src/main/res/
+          rm -f android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml
+
       - name: Set app name
         run: sed -i 's/android:label="university_portal"/android:label="Riphah Portal"/' android/app/src/main/AndroidManifest.xml
 
@@ -33,5 +38,5 @@ jobs:
         with:
           tag_name: apk-latest
           name: Riphah Portal — Android APK
-          body: Installable Android APK of the Riphah University Portal app. Download app-release.apk and open it on your phone to install.
+          body: Installable Android APK of the Riphah University Portal app. Download app-release.apk and open it on your Android phone to install.
           files: build/app/outputs/flutter-apk/app-release.apk
